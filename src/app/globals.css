@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-warm-white text-charcoal font-sans text-base leading-relaxed;
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E"),
+      linear-gradient(180deg, #FAF8F4 0%, #F7F4EF 100%);
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif font-normal tracking-tight text-charcoal;
+  }
+
+  p {
+    @apply leading-[1.75];
+  }
+
+  ::selection {
+    @apply bg-mediterranean/15 text-charcoal;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-mediterranean;
+  }
+}
+
+@layer components {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .editorial-link {
+    @apply relative inline-block text-charcoal transition-colors duration-300;
+  }
+
+  .editorial-link::after {
+    content: "";
+    @apply absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-mediterranean transition-transform duration-500 ease-editorial;
+  }
+
+  .editorial-link:hover::after {
+    @apply scale-x-100;
+  }
+
+  .editorial-link:hover {
+    @apply text-mediterranean;
+  }
+
+  .image-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(34, 34, 34, 0.45) 0%,
+      rgba(34, 34, 34, 0.08) 45%,
+      transparent 100%
+    );
+  }
+
+  .paper-card {
+    @apply rounded-organic border border-stone/25 bg-warm-white/90 shadow-soft backdrop-blur-sm;
+  }
+
+  .vintage-photo {
+    filter: sepia(0.28) contrast(0.9) brightness(0.93) saturate(0.82);
+  }
+
+  .vintage-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.14;
+    mix-blend-mode: soft-light;
+  }
+}
+
+@layer utilities {
+  .section-padding {
+    @apply px-6 py-24 md:px-10 md:py-32 lg:px-16 lg:py-40;
+  }
+
+  .section-padding-sm {
+    @apply px-6 py-16 md:px-10 md:py-24 lg:px-16 lg:py-28;
+  }
+}
