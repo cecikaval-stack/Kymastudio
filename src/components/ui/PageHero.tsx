@@ -13,7 +13,7 @@ interface PageHeroProps {
 
 export function PageHero({ label, title, description }: PageHeroProps) {
   return (
-    <section className="relative overflow-hidden pb-14 pt-[max(6.75rem,calc(env(safe-area-inset-top)+5.5rem))] sm:pb-16 sm:pt-28 md:pt-40 md:pb-24">
+    <section className="relative overflow-hidden pb-12 pt-[max(6rem,calc(env(safe-area-inset-top)+4.75rem))] sm:pb-16 sm:pt-28 md:pt-40 md:pb-24">
       <WaveBackground opacity={0.04} />
       <Container className="page-gutter relative z-10">
         <FadeIn>

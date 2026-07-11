@@ -16,11 +16,11 @@ export function Hero() {
     <section className="relative flex min-h-0 items-start overflow-hidden lg:min-h-[100dvh] lg:items-center">
       <WaveBackground opacity={0.05} />
 
-      <Container className="page-gutter relative z-10 pb-20 pt-[max(6.75rem,calc(env(safe-area-inset-top)+5.5rem))] sm:pb-16 sm:pt-28 md:pb-20">
-        <div className="grid items-center gap-12 sm:gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="space-y-1 lg:col-span-7">
+      <Container className="page-gutter relative z-10 pb-14 pt-[max(6rem,calc(env(safe-area-inset-top)+4.75rem))] sm:pb-16 sm:pt-28 md:pb-20">
+        <div className="grid items-center gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-7">
             <FadeIn delay={0.1}>
-              <p className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-mediterranean sm:mb-6 sm:tracking-[0.25em]">
+              <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-mediterranean sm:mb-6 sm:tracking-[0.25em]">
                 Independent Branding &amp; Digital Studio
               </p>
             </FadeIn>
@@ -32,7 +32,7 @@ export function Hero() {
             </FadeIn>
 
             <FadeIn delay={0.35}>
-              <p className="mt-7 max-w-xl text-base leading-[1.75] text-charcoal/70 sm:mt-8 md:text-lg">
+              <p className="mt-6 max-w-xl text-base leading-[1.75] text-charcoal/70 sm:mt-8 md:text-lg">
                 {siteConfig.heroSubheading}
               </p>
             </FadeIn>
@@ -56,9 +56,9 @@ export function Hero() {
             </FadeIn>
           </div>
 
-          <FadeIn delay={0.3} direction="left" className="mt-2 lg:col-span-5 lg:mt-0">
+          <FadeIn delay={0.3} direction="left" className="mt-1 lg:col-span-5 lg:mt-0">
             <motion.div
-              className="relative mx-auto w-full max-w-sm px-2 sm:max-w-none sm:px-0"
+              className="relative mx-auto w-full max-w-sm sm:max-w-none"
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -80,8 +80,8 @@ export function Hero() {
             </motion.div>
           </FadeIn>
 
-          <FadeIn delay={0.5} className="mt-2 lg:hidden">
-            <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
+          <FadeIn delay={0.5} className="lg:hidden">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
               <Button href="/contact" fullWidth className="sm:w-auto">
                 Start Your Project
               </Button>
