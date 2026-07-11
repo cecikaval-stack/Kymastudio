@@ -18,7 +18,7 @@ export function Hero() {
 
       <Container className="relative z-10 pt-24 pb-12 sm:pt-28 sm:pb-16 md:pb-20">
         <div className="grid items-center gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="order-2 lg:order-1 lg:col-span-7">
+          <div className="lg:col-span-7">
             <FadeIn delay={0.1}>
               <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-mediterranean sm:mb-6 sm:tracking-[0.25em]">
                 Independent Branding &amp; Digital Studio
@@ -56,7 +56,7 @@ export function Hero() {
             </FadeIn>
           </div>
 
-          <FadeIn delay={0.3} direction="left" className="order-1 lg:order-2 lg:col-span-5">
+          <FadeIn delay={0.3} direction="left" className="lg:col-span-5">
             <motion.div
               className="relative mx-auto w-full max-w-sm sm:max-w-none"
               animate={{ y: [0, -6, 0] }}
