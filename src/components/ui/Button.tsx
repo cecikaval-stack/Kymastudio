@@ -12,6 +12,7 @@ interface ButtonProps {
   onClick?: () => void;
   type?: "button" | "submit";
   fullWidth?: boolean;
+  disabled?: boolean;
 }
 
 export function Button({
@@ -22,6 +23,7 @@ export function Button({
   onClick,
   type = "button",
   fullWidth = false,
+  disabled = false,
 }: ButtonProps) {
   const baseStyles =
     "inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-medium tracking-wide transition-all duration-500 ease-editorial";
@@ -39,6 +41,7 @@ export function Button({
     baseStyles,
     variants[variant],
     fullWidth && "w-full",
+    disabled && "pointer-events-none opacity-60",
     className
   );
 
@@ -65,8 +68,9 @@ export function Button({
     <motion.button
       type={type}
       onClick={onClick}
+      disabled={disabled}
       className={classes}
-      {...motionProps}
+      {...(disabled ? {} : motionProps)}
     >
       {children}
     </motion.button>

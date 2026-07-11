@@ -9,10 +9,48 @@ import { Button } from "@/components/ui/Button";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setError(null);
+    setIsSubmitting(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          company: formData.get("company"),
+          service: formData.get("service"),
+          message: formData.get("message"),
+          website: formData.get("website"),
+        }),
+      });
+
+      const data = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(data.error ?? "Something went wrong. Please try again.");
+      }
+
+      setSubmitted(true);
+      form.reset();
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again or email us directly."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -94,6 +132,15 @@ export default function ContactPage() {
                   onSubmit={handleSubmit}
                   className="space-y-5 rounded-organic border border-stone/30 bg-warm-white p-5 shadow-soft sm:space-y-6 sm:p-8 md:p-10"
                 >
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    className="hidden"
+                    aria-hidden="true"
+                  />
+
                   <div>
                     <label
                       htmlFor="name"
@@ -107,6 +154,7 @@ export default function ContactPage() {
                       name="name"
                       required
                       autoComplete="name"
+                      disabled={isSubmitting}
                       className="form-input"
                       placeholder="Your name"
                     />
@@ -125,6 +173,7 @@ export default function ContactPage() {
                       required
                       autoComplete="email"
                       inputMode="email"
+                      disabled={isSubmitting}
                       className="form-input"
                       placeholder="you@company.com"
                     />
@@ -141,6 +190,7 @@ export default function ContactPage() {
                       id="company"
                       name="company"
                       autoComplete="organization"
+                      disabled={isSubmitting}
                       className="form-input"
                       placeholder="Your company (optional)"
                     />
@@ -155,6 +205,7 @@ export default function ContactPage() {
                     <select
                       id="service"
                       name="service"
+                      disabled={isSubmitting}
                       className="form-input appearance-none"
                       defaultValue=""
                     >
@@ -181,12 +232,34 @@ export default function ContactPage() {
                       name="message"
                       required
                       rows={5}
+                      disabled={isSubmitting}
                       className="form-input min-h-[140px] resize-y"
                       placeholder="Tell us about your project..."
                     />
                   </div>
-                  <Button type="submit" fullWidth className="sm:w-auto">
-                    Send message
+
+                  {error && (
+                    <p className="text-sm text-red-700/80" role="alert">
+                      {error}
+                      {" "}
+                      You can also email{" "}
+                      <a
+                        href={`mailto:${siteConfig.email}`}
+                        className="underline underline-offset-2"
+                      >
+                        {siteConfig.email}
+                      </a>{" "}
+                      directly.
+                    </p>
+                  )}
+
+                  <Button
+                    type="submit"
+                    fullWidth
+                    className="sm:w-auto"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Send message"}
                   </Button>
                 </form>
               )}
