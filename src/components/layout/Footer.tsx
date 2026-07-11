@@ -51,25 +51,7 @@ export function Footer() {
             <h3 className="mb-6 text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
               Connect
             </h3>
-            <ul className="space-y-2 text-sm text-charcoal/70 sm:space-y-3">
-              <li>
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  className="editorial-link break-all sm:break-normal"
-                >
-                  {siteConfig.email}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-                  className="editorial-link touch-target inline-flex min-h-[44px] items-center"
-                >
-                  {siteConfig.phone}
-                </a>
-              </li>
-              <li>{siteConfig.location}</li>
-            </ul>
+            <p className="text-sm text-charcoal/70">{siteConfig.location}</p>
             <div className="mt-6 flex flex-wrap gap-4 sm:gap-6">
               {Object.entries(siteConfig.social).map(([platform, url]) => (
                 <a
