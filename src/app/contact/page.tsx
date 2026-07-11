@@ -81,7 +81,7 @@ export default function ContactPage() {
       setError(
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please try again or email us directly."
+          : "Something went wrong. Please try again."
       );
     } finally {
       setIsSubmitting(false);
@@ -101,28 +101,6 @@ export default function ContactPage() {
           <div className="grid gap-12 sm:gap-16 lg:grid-cols-2 lg:gap-24">
             <FadeIn>
               <div className="space-y-8 sm:space-y-10">
-                <div>
-                  <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
-                    Email
-                  </h2>
-                  <a
-                    href={`mailto:${siteConfig.email}`}
-                    className="editorial-link mt-2 inline-block break-all font-serif text-xl text-charcoal sm:break-normal sm:text-2xl"
-                  >
-                    {siteConfig.email}
-                  </a>
-                </div>
-                <div>
-                  <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
-                    Phone
-                  </h2>
-                  <a
-                    href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-                    className="editorial-link touch-target mt-2 inline-flex items-center font-serif text-xl text-charcoal sm:text-2xl"
-                  >
-                    {siteConfig.phone}
-                  </a>
-                </div>
                 <div>
                   <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
                     Based
@@ -275,15 +253,7 @@ export default function ContactPage() {
 
                   {error && (
                     <p className="text-sm text-red-700/80" role="alert">
-                      {error}{" "}
-                      You can also email{" "}
-                      <a
-                        href={`mailto:${siteConfig.email}`}
-                        className="underline underline-offset-2"
-                      >
-                        {siteConfig.email}
-                      </a>{" "}
-                      directly.
+                      {error}
                     </p>
                   )}
 
