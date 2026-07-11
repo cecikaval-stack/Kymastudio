@@ -119,10 +119,10 @@ export function Header() {
             aria-hidden={!isOpen}
           >
             <nav
-              className="flex h-full flex-col overflow-y-auto overscroll-contain px-6 pb-8 pt-[5.5rem] sm:px-8 sm:pt-[6rem]"
+              className="flex h-full flex-col overflow-y-auto overscroll-contain px-6 pb-10 pt-[5.5rem] sm:px-8 sm:pt-[6rem]"
               aria-label="Mobile navigation"
             >
-              <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center gap-1 py-4">
+              <div className="mx-auto flex w-full max-w-sm flex-col gap-1 pt-4">
                 {mobileNavigation.map((item, i) => (
                   <motion.div
                     key={item.href}
@@ -150,12 +150,12 @@ export function Header() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: mobileNavigation.length * 0.05, duration: 0.35 }}
-                className="mx-auto w-full max-w-sm shrink-0 pt-4"
+                className="safe-bottom mx-auto mt-auto w-full max-w-sm shrink-0 pt-10"
               >
                 <Link
                   href="/contact"
                   onClick={() => setIsOpen(false)}
-                  className="touch-target flex w-full items-center justify-center rounded-full bg-charcoal px-6 py-3.5 text-sm font-medium tracking-wide text-warm-white transition-colors hover:bg-mediterranean"
+                  className="touch-target flex w-full items-center justify-center rounded-full border border-charcoal/20 px-6 py-3.5 text-sm tracking-wide transition-all duration-500 hover:border-mediterranean hover:text-mediterranean"
                 >
                   Start Your Project
                 </Link>

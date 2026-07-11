@@ -13,7 +13,7 @@ import { WaveLine } from "@/components/ui/WaveLine";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[100dvh] items-center overflow-hidden">
+    <section className="relative flex min-h-0 items-start overflow-hidden lg:min-h-[100dvh] lg:items-center">
       <WaveBackground opacity={0.05} />
 
       <Container className="relative z-10 pt-24 pb-12 sm:pt-28 sm:pb-16 md:pb-20">
@@ -38,11 +38,11 @@ export function Hero() {
             </FadeIn>
 
             <FadeIn delay={0.5}>
-              <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
-                <Button href="/contact" fullWidth className="sm:w-auto">
+              <div className="mt-8 hidden flex-col gap-3 sm:mt-10 lg:flex lg:flex-row lg:flex-wrap lg:items-center lg:gap-5">
+                <Button href="/contact" fullWidth className="sm:w-auto lg:w-auto">
                   Start Your Project
                 </Button>
-                <Button href="/services" variant="secondary" fullWidth className="sm:w-auto">
+                <Button href="/services" variant="secondary" fullWidth className="sm:w-auto lg:w-auto">
                   Our Services
                 </Button>
               </div>
@@ -78,6 +78,17 @@ export function Hero() {
                 aria-hidden="true"
               />
             </motion.div>
+          </FadeIn>
+
+          <FadeIn delay={0.5} className="lg:hidden">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
+              <Button href="/contact" fullWidth className="sm:w-auto">
+                Start Your Project
+              </Button>
+              <Button href="/services" variant="secondary" fullWidth className="sm:w-auto">
+                Our Services
+              </Button>
+            </div>
           </FadeIn>
         </div>
       </Container>
