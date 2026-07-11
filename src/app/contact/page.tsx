@@ -7,6 +7,15 @@ import { Container } from "@/components/ui/Container";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 
+const serviceLabels: Record<string, string> = {
+  "brand-strategy": "Brand Strategy",
+  "brand-identity": "Brand Identity",
+  "website-design": "Website Design",
+  "website-development": "Website Development",
+  "full-project": "Full Project",
+  other: "Something else",
+};
+
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -19,25 +28,51 @@ export default function ContactPage() {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const company = String(formData.get("company") ?? "").trim();
+    const service = String(formData.get("service") ?? "");
+    const message = String(formData.get("message") ?? "").trim();
+    const website = String(formData.get("website") ?? "").trim();
+
+    if (website) {
+      setSubmitted(true);
+      form.reset();
+      setIsSubmitting(false);
+      return;
+    }
+
+    const serviceLabel = service ? serviceLabels[service] ?? service : "Not specified";
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.get("name"),
-          email: formData.get("email"),
-          company: formData.get("company"),
-          service: formData.get("service"),
-          message: formData.get("message"),
-          website: formData.get("website"),
-        }),
-      });
+      const response = await fetch(
+        `https://formsubmit.co/ajax/${encodeURIComponent(siteConfig.email)}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            company: company || "Not provided",
+            service: serviceLabel,
+            message,
+            _subject: `New Kyma Studio enquiry from ${name}`,
+            _replyto: email,
+            _template: "table",
+            _captcha: "false",
+          }),
+        }
+      );
 
-      const data = (await response.json()) as { error?: string };
+      const data = (await response.json()) as { success?: string; message?: string };
 
-      if (!response.ok) {
-        throw new Error(data.error ?? "Something went wrong. Please try again.");
+      if (!response.ok || data.success !== "true") {
+        throw new Error(
+          data.message ?? "Something went wrong. Please try again."
+        );
       }
 
       setSubmitted(true);
@@ -240,8 +275,7 @@ export default function ContactPage() {
 
                   {error && (
                     <p className="text-sm text-red-700/80" role="alert">
-                      {error}
-                      {" "}
+                      {error}{" "}
                       You can also email{" "}
                       <a
                         href={`mailto:${siteConfig.email}`}
