@@ -129,22 +129,13 @@ export default function AboutPage() {
                 sizes="(max-width: 768px) 100vw, 42vw"
               />
             </FadeIn>
-            <FadeIn delay={0.15} className="md:col-span-12 lg:col-span-8">
+            <FadeIn delay={0.15} className="md:col-span-12">
               <VintageImage
                 src={images.kea[2].src}
                 alt={images.kea[2].alt}
                 fill
-                className="relative aspect-[21/9] rounded-organic shadow-soft"
-                sizes="(max-width: 1024px) 100vw, 66vw"
-              />
-            </FadeIn>
-            <FadeIn delay={0.2} className="flex items-end md:col-span-12 lg:col-span-4">
-              <VintageImage
-                src={images.aboutSecondary.src}
-                alt={images.aboutSecondary.alt}
-                fill
-                className="relative aspect-[4/3] rounded-organic shadow-soft lg:aspect-auto lg:h-full lg:min-h-[220px]"
-                sizes="(max-width: 1024px) 100vw, 33vw"
+                className="relative aspect-[16/9] rounded-organic shadow-soft sm:aspect-[21/9]"
+                sizes="100vw"
               />
             </FadeIn>
           </div>

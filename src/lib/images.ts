@@ -23,8 +23,8 @@ export const images = {
       alt: "Hillside town on Kea island at golden hour",
     },
     {
-      src: "https://images.unsplash.com/photo-1751839351858-8da973a98865?w=1200&q=80",
-      alt: "Sunset over the Aegean Sea near Kea, Greece",
+      src: "https://images.unsplash.com/photo-1759472287837-927ac19d1065?w=1600&q=80",
+      alt: "Turquoise Aegean waters and rocky shoreline near Kea, Greece",
     },
   ],
   sketchbook: {
