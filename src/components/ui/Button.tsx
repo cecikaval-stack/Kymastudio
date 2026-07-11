@@ -11,6 +11,7 @@ interface ButtonProps {
   className?: string;
   onClick?: () => void;
   type?: "button" | "submit";
+  fullWidth?: boolean;
 }
 
 export function Button({
@@ -20,9 +21,10 @@ export function Button({
   className,
   onClick,
   type = "button",
+  fullWidth = false,
 }: ButtonProps) {
   const baseStyles =
-    "inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-medium tracking-wide transition-all duration-500 ease-editorial";
+    "inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-medium tracking-wide transition-all duration-500 ease-editorial";
 
   const variants = {
     primary:
@@ -33,7 +35,12 @@ export function Button({
       "bg-transparent text-charcoal hover:text-mediterranean underline-offset-4 hover:underline",
   };
 
-  const classes = cn(baseStyles, variants[variant], className);
+  const classes = cn(
+    baseStyles,
+    variants[variant],
+    fullWidth && "w-full",
+    className
+  );
 
   const motionProps = {
     whileHover: { scale: 1.02 },
@@ -43,7 +50,10 @@ export function Button({
 
   if (href) {
     return (
-      <motion.div {...motionProps} className="inline-block">
+      <motion.div
+        {...motionProps}
+        className={cn("inline-block", fullWidth && "block w-full")}
+      >
         <Link href={href} className={classes}>
           {children}
         </Link>

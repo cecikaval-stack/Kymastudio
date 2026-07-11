@@ -42,20 +42,20 @@ export default function InsightsPage() {
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                     <div>
-                      <div className="flex items-center gap-4 text-xs uppercase tracking-[0.15em] text-charcoal/50">
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs uppercase tracking-[0.15em] text-charcoal/50">
                         <span>{article.category}</span>
                         <span className="h-1 w-1 rounded-full bg-stone" />
                         <span>{article.date}</span>
                         <span className="h-1 w-1 rounded-full bg-stone" />
                         <span>{article.readTime}</span>
                       </div>
-                      <h2 className="mt-4 font-serif text-2xl text-charcoal transition-colors group-hover:text-mediterranean md:text-3xl">
+                      <h2 className="mt-4 font-serif text-xl text-charcoal transition-colors group-hover:text-mediterranean sm:text-2xl md:text-3xl">
                         {article.title}
                       </h2>
                       <p className="mt-4 text-base leading-relaxed text-charcoal/60">
                         {article.excerpt}
                       </p>
-                      <span className="mt-4 inline-block text-sm font-medium text-mediterranean opacity-0 transition-opacity group-hover:opacity-100">
+                      <span className="mt-4 inline-flex min-h-[44px] items-center text-sm font-medium text-mediterranean opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100">
                         Read article →
                       </span>
                     </div>

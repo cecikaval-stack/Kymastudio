@@ -27,21 +27,24 @@ export default function ServicesPage() {
             {services.map((service, i) => (
               <FadeIn key={service.id} delay={i * 0.05}>
                 <article
-                  className={`grid items-start gap-8 border-b border-stone/30 py-12 md:grid-cols-12 md:gap-12 md:py-16 ${
+                  className={`border-b border-stone/30 py-10 sm:py-12 md:grid md:grid-cols-12 md:items-start md:gap-12 md:py-16 ${
                     i === 0 ? "border-t" : ""
                   }`}
                 >
-                  <div className="md:col-span-1">
-                    <span className="font-serif text-2xl text-mediterranean/50">
+                  <div className="flex items-start gap-4 md:contents">
+                    <span className="shrink-0 font-serif text-xl text-mediterranean/50 sm:text-2xl md:col-span-1">
                       {String(i + 1).padStart(2, "0")}
                     </span>
+                    <div className="min-w-0 flex-1 md:col-span-4">
+                      <h2 className="font-serif text-xl text-charcoal sm:text-2xl md:text-3xl lg:text-4xl">
+                        {service.title}
+                      </h2>
+                      <p className="mt-3 text-base leading-[1.75] text-charcoal/65 md:hidden md:text-lg">
+                        {service.description}
+                      </p>
+                    </div>
                   </div>
-                  <div className="md:col-span-4">
-                    <h2 className="font-serif text-2xl text-charcoal md:text-3xl lg:text-4xl">
-                      {service.title}
-                    </h2>
-                  </div>
-                  <div className="md:col-span-7">
+                  <div className="hidden md:col-span-7 md:block">
                     <p className="text-base leading-[1.75] text-charcoal/65 md:text-lg">
                       {service.description}
                     </p>

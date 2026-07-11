@@ -10,7 +10,7 @@ export function Footer() {
   return (
     <footer className="border-t border-stone/30 bg-sand/30">
       <Container className="section-padding-sm">
-        <div className="grid gap-16 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-12 sm:gap-16 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <Link
               href="/"
@@ -33,12 +33,12 @@ export function Footer() {
             <h3 className="mb-6 text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
               Navigate
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-2 sm:space-y-3">
               {navigation.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="editorial-link text-sm text-charcoal/70"
+                    className="editorial-link touch-target inline-flex min-h-[44px] items-center text-sm text-charcoal/70"
                   >
                     {item.label}
                   </Link>
@@ -51,36 +51,42 @@ export function Footer() {
             <h3 className="mb-6 text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
               Connect
             </h3>
-            <ul className="space-y-3 text-sm text-charcoal/70">
+            <ul className="space-y-2 text-sm text-charcoal/70 sm:space-y-3">
               <li>
-                <a href={`mailto:${siteConfig.email}`} className="editorial-link">
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="editorial-link break-all sm:break-normal"
+                >
                   {siteConfig.email}
                 </a>
               </li>
               <li>
-                <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="editorial-link">
+                <a
+                  href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+                  className="editorial-link touch-target inline-flex min-h-[44px] items-center"
+                >
                   {siteConfig.phone}
                 </a>
               </li>
               <li>{siteConfig.location}</li>
             </ul>
-            <div className="mt-6 flex gap-6">
+            <div className="mt-6 flex flex-wrap gap-4 sm:gap-6">
               {Object.entries(siteConfig.social).map(([platform, url]) => (
                 <a
                   key={platform}
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="editorial-link text-xs uppercase tracking-wider text-charcoal/50"
+                  className="editorial-link touch-target inline-flex min-h-[44px] items-center text-xs uppercase tracking-wider text-charcoal/50"
                 >
-                  {platform}
+                  {platform === "instagram" ? "@kymastudiogr" : platform}
                 </a>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-center gap-6 border-t border-stone/20 pt-10 md:flex-row md:justify-between">
+        <div className="mt-12 flex flex-col items-center gap-4 border-t border-stone/20 pt-8 text-center sm:mt-16 sm:gap-6 sm:pt-10 md:flex-row md:justify-between md:text-left">
           <WaveLine className="max-w-xs opacity-40" color="#CFC8BE" />
           <p className="text-xs text-charcoal/40">
             © {currentYear} {siteConfig.name}. Crafted with intention.

@@ -13,7 +13,7 @@ interface PageHeroProps {
 
 export function PageHero({ label, title, description }: PageHeroProps) {
   return (
-    <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
+    <section className="relative overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16 md:pt-40 md:pb-24">
       <WaveBackground opacity={0.04} />
       <Container className="relative z-10">
         <FadeIn>
@@ -22,7 +22,7 @@ export function PageHero({ label, title, description }: PageHeroProps) {
               {label}
             </p>
           )}
-          <h1 className="max-w-4xl font-serif text-4xl leading-[1.08] tracking-tight text-charcoal md:text-6xl lg:text-7xl text-balance">
+          <h1 className="max-w-4xl font-serif text-[2rem] leading-[1.1] tracking-tight text-charcoal sm:text-4xl md:text-6xl lg:text-7xl text-balance">
             {title}
           </h1>
           {description && (

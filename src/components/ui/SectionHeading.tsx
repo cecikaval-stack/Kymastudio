@@ -19,7 +19,7 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        "mb-16 md:mb-20",
+        "mb-12 sm:mb-16 md:mb-20",
         align === "center" && "text-center",
         className
       )}
@@ -29,7 +29,7 @@ export function SectionHeading({
           {label}
         </p>
       )}
-      <h2 className="font-serif text-4xl leading-[1.1] tracking-tight text-charcoal md:text-5xl lg:text-[3.5rem] text-balance">
+      <h2 className="font-serif text-[1.75rem] leading-[1.12] tracking-tight text-charcoal sm:text-4xl md:text-5xl lg:text-[3.5rem] text-balance">
         {title}
       </h2>
       {description && (

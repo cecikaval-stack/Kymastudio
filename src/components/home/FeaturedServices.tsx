@@ -36,7 +36,7 @@ export function FeaturedServices() {
                 <motion.article
                   whileHover={{ y: -3 }}
                   transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  className="group relative flex h-full flex-col rounded-organic border border-stone/25 bg-warm-white/80 p-7 shadow-soft backdrop-blur-sm transition-shadow duration-500 hover:shadow-lift"
+                  className="group relative flex h-full flex-col rounded-organic border border-stone/25 bg-warm-white/80 p-5 shadow-soft backdrop-blur-sm transition-shadow duration-500 hover:shadow-lift sm:p-7"
                 >
                   <div className="mb-5 flex items-center justify-between">
                     <div className="h-px w-8 bg-mediterranean/40 transition-all duration-500 group-hover:w-14 group-hover:bg-mediterranean" />
@@ -52,7 +52,7 @@ export function FeaturedServices() {
                   </p>
                   <Link
                     href="/services"
-                    className="mt-5 text-xs font-medium uppercase tracking-wider text-mediterranean opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    className="touch-target mt-5 inline-flex min-h-[44px] items-center text-xs font-medium uppercase tracking-wider text-mediterranean opacity-100 transition-opacity duration-300 sm:opacity-0 sm:group-hover:opacity-100"
                     aria-label={`Learn more about ${service.title}`}
                   >
                     Learn more →

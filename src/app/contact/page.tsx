@@ -25,16 +25,16 @@ export default function ContactPage() {
 
       <section className="section-padding-sm">
         <Container>
-          <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
+          <div className="grid gap-12 sm:gap-16 lg:grid-cols-2 lg:gap-24">
             <FadeIn>
-              <div className="space-y-10">
+              <div className="space-y-8 sm:space-y-10">
                 <div>
                   <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
                     Email
                   </h2>
                   <a
                     href={`mailto:${siteConfig.email}`}
-                    className="editorial-link mt-2 inline-block font-serif text-2xl text-charcoal"
+                    className="editorial-link mt-2 inline-block break-all font-serif text-xl text-charcoal sm:break-normal sm:text-2xl"
                   >
                     {siteConfig.email}
                   </a>
@@ -45,7 +45,7 @@ export default function ContactPage() {
                   </h2>
                   <a
                     href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-                    className="editorial-link mt-2 inline-block font-serif text-2xl text-charcoal"
+                    className="editorial-link touch-target mt-2 inline-flex items-center font-serif text-xl text-charcoal sm:text-2xl"
                   >
                     {siteConfig.phone}
                   </a>
@@ -54,7 +54,7 @@ export default function ContactPage() {
                   <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
                     Based
                   </h2>
-                  <p className="mt-2 font-serif text-2xl text-charcoal">
+                  <p className="mt-2 font-serif text-xl text-charcoal sm:text-2xl">
                     {siteConfig.location}
                   </p>
                 </div>
@@ -62,16 +62,16 @@ export default function ContactPage() {
                   <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
                     Follow
                   </h2>
-                  <div className="mt-3 flex gap-6">
+                  <div className="mt-3 flex flex-wrap gap-4 sm:gap-6">
                     {Object.entries(siteConfig.social).map(([platform, url]) => (
                       <a
                         key={platform}
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="editorial-link text-sm capitalize text-charcoal/60"
+                        className="editorial-link touch-target inline-flex min-h-[44px] items-center text-sm capitalize text-charcoal/60"
                       >
-                        {platform}
+                        {platform === "instagram" ? "@kymastudiogr" : platform}
                       </a>
                     ))}
                   </div>
@@ -81,8 +81,8 @@ export default function ContactPage() {
 
             <FadeIn delay={0.2}>
               {submitted ? (
-                <div className="rounded-organic border border-stone/30 bg-sand/20 p-10 text-center shadow-soft">
-                  <p className="font-serif text-2xl text-charcoal">
+                <div className="rounded-organic border border-stone/30 bg-sand/20 p-8 text-center shadow-soft sm:p-10">
+                  <p className="font-serif text-xl text-charcoal sm:text-2xl">
                     Thank you for reaching out.
                   </p>
                   <p className="mt-4 text-sm text-charcoal/60">
@@ -92,7 +92,7 @@ export default function ContactPage() {
               ) : (
                 <form
                   onSubmit={handleSubmit}
-                  className="space-y-6 rounded-organic border border-stone/30 bg-warm-white p-8 shadow-soft md:p-10"
+                  className="space-y-5 rounded-organic border border-stone/30 bg-warm-white p-5 shadow-soft sm:space-y-6 sm:p-8 md:p-10"
                 >
                   <div>
                     <label
@@ -106,7 +106,8 @@ export default function ContactPage() {
                       id="name"
                       name="name"
                       required
-                      className="w-full border-b border-stone/50 bg-transparent py-3 text-charcoal transition-colors focus:border-mediterranean focus:outline-none"
+                      autoComplete="name"
+                      className="form-input"
                       placeholder="Your name"
                     />
                   </div>
@@ -122,7 +123,9 @@ export default function ContactPage() {
                       id="email"
                       name="email"
                       required
-                      className="w-full border-b border-stone/50 bg-transparent py-3 text-charcoal transition-colors focus:border-mediterranean focus:outline-none"
+                      autoComplete="email"
+                      inputMode="email"
+                      className="form-input"
                       placeholder="you@company.com"
                     />
                   </div>
@@ -137,7 +140,8 @@ export default function ContactPage() {
                       type="text"
                       id="company"
                       name="company"
-                      className="w-full border-b border-stone/50 bg-transparent py-3 text-charcoal transition-colors focus:border-mediterranean focus:outline-none"
+                      autoComplete="organization"
+                      className="form-input"
                       placeholder="Your company (optional)"
                     />
                   </div>
@@ -151,7 +155,7 @@ export default function ContactPage() {
                     <select
                       id="service"
                       name="service"
-                      className="w-full border-b border-stone/50 bg-transparent py-3 text-charcoal transition-colors focus:border-mediterranean focus:outline-none"
+                      className="form-input appearance-none"
                       defaultValue=""
                     >
                       <option value="" disabled>
@@ -177,11 +181,11 @@ export default function ContactPage() {
                       name="message"
                       required
                       rows={5}
-                      className="w-full resize-none border-b border-stone/50 bg-transparent py-3 text-charcoal transition-colors focus:border-mediterranean focus:outline-none"
+                      className="form-input min-h-[140px] resize-y"
                       placeholder="Tell us about your project..."
                     />
                   </div>
-                  <Button type="submit" className="w-full md:w-auto">
+                  <Button type="submit" fullWidth className="sm:w-auto">
                     Send message
                   </Button>
                 </form>

@@ -14,7 +14,7 @@ export const siteConfig = {
   phone: "+30 697 197 0062",
   location: "Working with clients worldwide",
   social: {
-    instagram: "https://instagram.com/kymastudio2",
+    instagram: "https://www.instagram.com/kymastudiogr",
   },
 };
 

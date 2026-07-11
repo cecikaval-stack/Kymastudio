@@ -28,14 +28,14 @@ export function ProcessPreview() {
               aria-hidden="true"
             />
 
-            <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-5">
+            <div className="grid gap-10 sm:gap-8 md:grid-cols-3 lg:grid-cols-5">
               {processSteps.map((step, i) => (
                 <FadeIn key={step.id} delay={i * 0.1}>
-                  <div className="group relative text-center lg:text-left">
-                    <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-stone/50 bg-warm-white font-serif text-lg text-mediterranean transition-all duration-500 group-hover:border-mediterranean group-hover:shadow-soft lg:mx-0">
+                  <div className="group relative text-left">
+                    <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-stone/50 bg-warm-white font-serif text-lg text-mediterranean transition-all duration-500 group-hover:border-mediterranean group-hover:shadow-soft sm:mb-6 sm:h-16 sm:w-16 lg:mx-0">
                       {step.number}
                     </div>
-                    <h3 className="font-serif text-2xl text-charcoal">
+                    <h3 className="font-serif text-xl text-charcoal sm:text-2xl">
                       {step.title}
                     </h3>
                     <p className="mt-3 text-sm leading-relaxed text-charcoal/60">
@@ -48,8 +48,8 @@ export function ProcessPreview() {
           </div>
 
           <FadeIn delay={0.5}>
-            <div className="mt-16 flex justify-center">
-              <Button href="/process" variant="secondary">
+            <div className="mt-12 flex justify-center sm:mt-16">
+              <Button href="/process" variant="secondary" fullWidth className="sm:w-auto">
                 Explore our process
               </Button>
             </div>

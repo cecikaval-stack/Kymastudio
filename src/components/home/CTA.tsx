@@ -22,9 +22,11 @@ export function CTA() {
             Every great brand starts with a conversation. We&apos;d love to hear
             about your vision.
           </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-6">
-            <Button href="/contact">Start Your Project</Button>
-            <Button href="/about" variant="secondary">
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6">
+            <Button href="/contact" fullWidth className="sm:w-auto">
+              Start Your Project
+            </Button>
+            <Button href="/about" variant="secondary" fullWidth className="sm:w-auto">
               About us
             </Button>
           </div>

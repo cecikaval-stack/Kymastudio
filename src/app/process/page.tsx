@@ -29,23 +29,24 @@ export default function ProcessPage() {
               {processSteps.map((step, i) => (
                 <FadeIn key={step.id} delay={i * 0.1}>
                   <div
-                    className={`grid items-start gap-8 py-16 md:grid-cols-12 md:gap-16 md:py-20 ${
-                      i < processSteps.length - 1
-                        ? "border-b border-stone/30"
-                        : ""
+                    className={`border-b border-stone/30 py-10 sm:py-12 md:grid md:grid-cols-12 md:items-start md:gap-16 md:py-20 ${
+                      i < processSteps.length - 1 ? "" : "border-b-0"
                     }`}
                   >
-                    <div className="md:col-span-3">
-                      <span className="font-serif text-5xl text-mediterranean/30 md:text-6xl">
+                    <div className="flex items-start gap-4 md:contents">
+                      <span className="shrink-0 font-serif text-4xl leading-none text-mediterranean/30 sm:text-5xl md:col-span-3 md:text-6xl">
                         {step.number}
                       </span>
+                      <div className="min-w-0 flex-1 md:col-span-4">
+                        <h2 className="font-serif text-xl text-charcoal sm:text-2xl md:text-3xl lg:text-4xl">
+                          {step.title}
+                        </h2>
+                        <p className="mt-3 text-base leading-relaxed text-charcoal/65 md:mt-0 md:hidden md:text-lg">
+                          {step.description}
+                        </p>
+                      </div>
                     </div>
-                    <div className="md:col-span-4">
-                      <h2 className="font-serif text-3xl text-charcoal md:text-4xl">
-                        {step.title}
-                      </h2>
-                    </div>
-                    <div className="md:col-span-5">
+                    <div className="hidden md:col-span-5 md:block">
                       <p className="text-base leading-relaxed text-charcoal/65 md:text-lg">
                         {step.description}
                       </p>

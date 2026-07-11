@@ -18,12 +18,12 @@ export function Philosophy() {
       />
 
       <Container className="section-padding relative z-10">
-        <div className="grid items-center gap-16 lg:grid-cols-2">
+        <div className="grid items-center gap-10 sm:gap-16 lg:grid-cols-2">
           <FadeIn>
             <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-sea">
               Our philosophy
             </p>
-            <h2 className="font-serif text-4xl leading-[1.1] tracking-tight text-warm-white md:text-5xl lg:text-[3.25rem] text-balance">
+            <h2 className="font-serif text-[1.75rem] leading-[1.12] tracking-tight text-warm-white sm:text-4xl md:text-5xl lg:text-[3.25rem] text-balance">
               {philosophyContent.heading}
             </h2>
             <div className="mt-8">
@@ -46,7 +46,7 @@ export function Philosophy() {
         </div>
 
         <FadeIn delay={0.4}>
-          <div className="mt-20 flex justify-center">
+          <div className="mt-12 flex justify-center sm:mt-20">
             <motion.div
               className="h-24 w-px bg-gradient-to-b from-sea/50 to-transparent"
               aria-hidden="true"
