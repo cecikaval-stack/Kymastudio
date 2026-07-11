@@ -13,9 +13,9 @@ interface PageHeroProps {
 
 export function PageHero({ label, title, description }: PageHeroProps) {
   return (
-    <section className="relative overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16 md:pt-40 md:pb-24">
+    <section className="relative overflow-hidden pb-14 pt-[max(6.75rem,calc(env(safe-area-inset-top)+5.5rem))] sm:pb-16 sm:pt-28 md:pt-40 md:pb-24">
       <WaveBackground opacity={0.04} />
-      <Container className="relative z-10">
+      <Container className="page-gutter relative z-10">
         <FadeIn>
           {label && (
             <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-mediterranean">

@@ -12,7 +12,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export function FeaturedServices() {
   return (
     <>
-      <CurvedDivider color="#E7DCCF" className="-mt-8 opacity-60" />
+      <CurvedDivider color="#E7DCCF" className="-mt-4 opacity-60 sm:-mt-8" />
       <section className="relative bg-sand/25 section-padding">
         <div
           className="pointer-events-none absolute top-20 right-0 h-64 w-64 opacity-30"
