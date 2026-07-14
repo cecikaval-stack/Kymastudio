@@ -3,6 +3,7 @@ import { navigation, siteConfig } from "@/lib/data";
 import { Container } from "@/components/ui/Container";
 import { WaveLogo } from "@/components/ui/WaveLogo";
 import { WaveLine } from "@/components/ui/WaveLine";
+import { InstagramIcon, MailIcon } from "@/components/ui/Icons";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -52,24 +53,21 @@ export function Footer() {
               Connect
             </h3>
             <p className="text-sm text-charcoal/70">{siteConfig.location}</p>
-            <div className="mt-6 flex flex-col gap-3">
-              <div className="flex flex-wrap gap-4 sm:gap-6">
-                {Object.entries(siteConfig.social).map(([platform, url]) => (
-                  <a
-                    key={platform}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="editorial-link touch-target inline-flex min-h-[44px] items-center text-xs uppercase tracking-wider text-charcoal/50"
-                  >
-                    {platform === "instagram" ? "@kymastudiogr" : platform}
-                  </a>
-                ))}
-              </div>
+            <div className="mt-6 flex flex-col gap-1">
+              <a
+                href={siteConfig.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="editorial-link touch-target inline-flex min-h-[44px] items-center gap-2.5 text-xs uppercase tracking-wider text-charcoal/50"
+              >
+                <InstagramIcon className="h-4 w-4" />
+                @kymastudiogr
+              </a>
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="editorial-link touch-target inline-flex min-h-[44px] items-center text-xs text-charcoal/50"
+                className="editorial-link touch-target inline-flex min-h-[44px] items-center gap-2.5 text-xs text-charcoal/50"
               >
+                <MailIcon className="h-4 w-4" />
                 {siteConfig.email}
               </a>
             </div>

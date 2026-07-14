@@ -6,6 +6,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Container } from "@/components/ui/Container";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
+import { InstagramIcon, MailIcon } from "@/components/ui/Icons";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -112,24 +113,21 @@ export default function ContactPage() {
                   <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
                     Follow
                   </h2>
-                  <div className="mt-3 flex flex-col gap-3">
-                    <div className="flex flex-wrap gap-4 sm:gap-6">
-                      {Object.entries(siteConfig.social).map(([platform, url]) => (
-                        <a
-                          key={platform}
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="editorial-link touch-target inline-flex min-h-[44px] items-center text-sm capitalize text-charcoal/60"
-                        >
-                          {platform === "instagram" ? "@kymastudiogr" : platform}
-                        </a>
-                      ))}
-                    </div>
+                  <div className="mt-3 flex flex-col gap-1">
+                    <a
+                      href={siteConfig.social.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="editorial-link touch-target inline-flex min-h-[44px] items-center gap-2.5 text-sm text-charcoal/60"
+                    >
+                      <InstagramIcon className="h-[1.125rem] w-[1.125rem]" />
+                      @kymastudiogr
+                    </a>
                     <a
                       href={`mailto:${siteConfig.email}`}
-                      className="editorial-link touch-target inline-flex min-h-[44px] items-center text-sm text-charcoal/60"
+                      className="editorial-link touch-target inline-flex min-h-[44px] items-center gap-2.5 text-sm text-charcoal/60"
                     >
+                      <MailIcon className="h-[1.125rem] w-[1.125rem]" />
                       {siteConfig.email}
                     </a>
                   </div>
