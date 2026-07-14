@@ -10,7 +10,7 @@ export const siteConfig = {
   description:
     "Kyma Studio is an independent creative and branding studio helping startups and established businesses grow through brand strategy, identity design, website design, development and digital marketing.",
   url: "https://kymastudio.gr",
-  email: "cecikaval@gmail.com",
+  email: "info@kymastudio.gr",
   phone: "+30 697 197 0062",
   location: "Working with clients worldwide",
   social: {

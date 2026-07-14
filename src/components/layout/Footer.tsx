@@ -52,18 +52,26 @@ export function Footer() {
               Connect
             </h3>
             <p className="text-sm text-charcoal/70">{siteConfig.location}</p>
-            <div className="mt-6 flex flex-wrap gap-4 sm:gap-6">
-              {Object.entries(siteConfig.social).map(([platform, url]) => (
-                <a
-                  key={platform}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="editorial-link touch-target inline-flex min-h-[44px] items-center text-xs uppercase tracking-wider text-charcoal/50"
-                >
-                  {platform === "instagram" ? "@kymastudiogr" : platform}
-                </a>
-              ))}
+            <div className="mt-6 flex flex-col gap-3">
+              <div className="flex flex-wrap gap-4 sm:gap-6">
+                {Object.entries(siteConfig.social).map(([platform, url]) => (
+                  <a
+                    key={platform}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="editorial-link touch-target inline-flex min-h-[44px] items-center text-xs uppercase tracking-wider text-charcoal/50"
+                  >
+                    {platform === "instagram" ? "@kymastudiogr" : platform}
+                  </a>
+                ))}
+              </div>
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="editorial-link touch-target inline-flex min-h-[44px] items-center text-xs text-charcoal/50"
+              >
+                {siteConfig.email}
+              </a>
             </div>
           </div>
         </div>

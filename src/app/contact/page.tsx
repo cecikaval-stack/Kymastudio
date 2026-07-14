@@ -113,18 +113,26 @@ export default function ContactPage() {
                   <h2 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
                     Follow
                   </h2>
-                  <div className="mt-3 flex flex-wrap gap-4 sm:gap-6">
-                    {Object.entries(siteConfig.social).map(([platform, url]) => (
-                      <a
-                        key={platform}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="editorial-link touch-target inline-flex min-h-[44px] items-center text-sm capitalize text-charcoal/60"
-                      >
-                        {platform === "instagram" ? "@kymastudiogr" : platform}
-                      </a>
-                    ))}
+                  <div className="mt-3 flex flex-col gap-3">
+                    <div className="flex flex-wrap gap-4 sm:gap-6">
+                      {Object.entries(siteConfig.social).map(([platform, url]) => (
+                        <a
+                          key={platform}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="editorial-link touch-target inline-flex min-h-[44px] items-center text-sm capitalize text-charcoal/60"
+                        >
+                          {platform === "instagram" ? "@kymastudiogr" : platform}
+                        </a>
+                      ))}
+                    </div>
+                    <a
+                      href={`mailto:${siteConfig.email}`}
+                      className="editorial-link touch-target inline-flex min-h-[44px] items-center text-sm text-charcoal/60"
+                    >
+                      {siteConfig.email}
+                    </a>
                   </div>
                 </div>
               </div>
