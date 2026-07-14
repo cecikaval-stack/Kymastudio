@@ -16,6 +16,8 @@ export const siteConfig = {
   social: {
     instagram: "https://www.instagram.com/kymastudiogr",
   },
+  /** Public Web3Forms access key — get one free at https://web3forms.com */
+  web3formsAccessKey: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? "159b0b68-d5e1-48a9-9829-9083a923189d",
 };
 
 export const navigation: NavItem[] = [

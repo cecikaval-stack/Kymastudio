@@ -1,187 +1,92 @@
 "use client";
 
-import { Suspense, useEffect, useState, type FormEvent } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState, type FormEvent } from "react";
 import { siteConfig } from "@/lib/data";
 import { PageHero } from "@/components/ui/PageHero";
 import { Container } from "@/components/ui/Container";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 
-function ContactForm() {
-  const searchParams = useSearchParams();
+export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [nextUrl, setNextUrl] = useState(
-    `${siteConfig.url}/contact?sent=1`
-  );
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    setNextUrl(`${window.location.origin}/contact?sent=1`);
-    if (searchParams.get("sent") === "1") {
-      setSubmitted(true);
-    }
-  }, [searchParams]);
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+    setIsSubmitting(true);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     const form = e.currentTarget;
-    const honeypot = String(new FormData(form).get("website") ?? "").trim();
+    const formData = new FormData(form);
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const company = String(formData.get("company") ?? "").trim();
+    const service = String(formData.get("service") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+    const botcheck = String(formData.get("botcheck") ?? "");
 
-    if (honeypot) {
-      e.preventDefault();
+    if (botcheck) {
       setSubmitted(true);
       form.reset();
+      setIsSubmitting(false);
       return;
     }
 
-    setIsSubmitting(true);
+    const accessKey = siteConfig.web3formsAccessKey;
+
+    if (!accessKey) {
+      setError(
+        "The contact form is being updated. Please email us directly at info@kymastudio.gr."
+      );
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name,
+          email,
+          company: company || "Not provided",
+          service: service || "Not specified",
+          message,
+          subject: `New Kyma Studio enquiry from ${name}`,
+          from_name: "Kyma Studio",
+          replyto: email,
+        }),
+      });
+
+      const data = (await response.json()) as {
+        success?: boolean;
+        message?: string;
+      };
+
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message ?? "Something went wrong. Please try again."
+        );
+      }
+
+      setSubmitted(true);
+      form.reset();
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try emailing info@kymastudio.gr."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
-  return (
-    <FadeIn delay={0.2}>
-      {submitted ? (
-        <div className="rounded-organic border border-stone/30 bg-sand/20 p-8 text-center shadow-soft sm:p-10">
-          <p className="font-serif text-xl text-charcoal sm:text-2xl">
-            Thank you for reaching out.
-          </p>
-          <p className="mt-4 text-sm text-charcoal/60">
-            We&apos;ll be in touch within two business days.
-          </p>
-        </div>
-      ) : (
-        <form
-          action={`https://formsubmit.co/${siteConfig.email}`}
-          method="POST"
-          onSubmit={handleSubmit}
-          className="space-y-5 rounded-organic border border-stone/30 bg-warm-white p-5 shadow-soft sm:space-y-6 sm:p-8 md:p-10"
-        >
-          <input type="hidden" name="_next" value={nextUrl} />
-          <input type="hidden" name="_subject" value="New Kyma Studio enquiry" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_honey" value="" />
-
-          <input
-            type="text"
-            name="website"
-            tabIndex={-1}
-            autoComplete="off"
-            className="hidden"
-            aria-hidden="true"
-          />
-
-          <div>
-            <label
-              htmlFor="name"
-              className="mb-2 block text-xs font-medium uppercase tracking-wider text-charcoal/50"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              autoComplete="name"
-              disabled={isSubmitting}
-              className="form-input"
-              placeholder="Your name"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="email"
-              className="mb-2 block text-xs font-medium uppercase tracking-wider text-charcoal/50"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              autoComplete="email"
-              inputMode="email"
-              disabled={isSubmitting}
-              className="form-input"
-              placeholder="you@company.com"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="company"
-              className="mb-2 block text-xs font-medium uppercase tracking-wider text-charcoal/50"
-            >
-              Company
-            </label>
-            <input
-              type="text"
-              id="company"
-              name="company"
-              autoComplete="organization"
-              disabled={isSubmitting}
-              className="form-input"
-              placeholder="Your company (optional)"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="service"
-              className="mb-2 block text-xs font-medium uppercase tracking-wider text-charcoal/50"
-            >
-              Interested in
-            </label>
-            <select
-              id="service"
-              name="service"
-              disabled={isSubmitting}
-              className="form-input appearance-none"
-              defaultValue=""
-            >
-              <option value="" disabled>
-                Select a service
-              </option>
-              <option value="Brand Strategy">Brand Strategy</option>
-              <option value="Brand Identity">Brand Identity</option>
-              <option value="Website Design">Website Design</option>
-              <option value="Website Development">Website Development</option>
-              <option value="Full Project">Full Project</option>
-              <option value="Something else">Something else</option>
-            </select>
-          </div>
-          <div>
-            <label
-              htmlFor="message"
-              className="mb-2 block text-xs font-medium uppercase tracking-wider text-charcoal/50"
-            >
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              required
-              rows={5}
-              disabled={isSubmitting}
-              className="form-input min-h-[140px] resize-y"
-              placeholder="Tell us about your project..."
-            />
-          </div>
-
-          <Button
-            type="submit"
-            fullWidth
-            className="sm:w-auto"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Sending..." : "Send message"}
-          </Button>
-        </form>
-      )}
-    </FadeIn>
-  );
-}
-
-export default function ContactPage() {
   return (
     <>
       <PageHero
@@ -232,15 +137,146 @@ export default function ContactPage() {
               </div>
             </FadeIn>
 
-            <Suspense
-              fallback={
-                <div className="rounded-organic border border-stone/30 bg-warm-white p-5 shadow-soft sm:p-8 md:p-10">
-                  <p className="text-sm text-charcoal/50">Loading form...</p>
+            <FadeIn delay={0.2}>
+              {submitted ? (
+                <div className="rounded-organic border border-stone/30 bg-sand/20 p-8 text-center shadow-soft sm:p-10">
+                  <p className="font-serif text-xl text-charcoal sm:text-2xl">
+                    Thank you for reaching out.
+                  </p>
+                  <p className="mt-4 text-sm text-charcoal/60">
+                    We&apos;ll be in touch within two business days.
+                  </p>
                 </div>
-              }
-            >
-              <ContactForm />
-            </Suspense>
+              ) : (
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-5 rounded-organic border border-stone/30 bg-warm-white p-5 shadow-soft sm:space-y-6 sm:p-8 md:p-10"
+                >
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    className="hidden"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                  />
+
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="mb-2 block text-xs font-medium uppercase tracking-wider text-charcoal/50"
+                    >
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      autoComplete="name"
+                      disabled={isSubmitting}
+                      className="form-input"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="mb-2 block text-xs font-medium uppercase tracking-wider text-charcoal/50"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      autoComplete="email"
+                      inputMode="email"
+                      disabled={isSubmitting}
+                      className="form-input"
+                      placeholder="you@company.com"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="company"
+                      className="mb-2 block text-xs font-medium uppercase tracking-wider text-charcoal/50"
+                    >
+                      Company
+                    </label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      autoComplete="organization"
+                      disabled={isSubmitting}
+                      className="form-input"
+                      placeholder="Your company (optional)"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="service"
+                      className="mb-2 block text-xs font-medium uppercase tracking-wider text-charcoal/50"
+                    >
+                      Interested in
+                    </label>
+                    <select
+                      id="service"
+                      name="service"
+                      disabled={isSubmitting}
+                      className="form-input appearance-none"
+                      defaultValue=""
+                    >
+                      <option value="" disabled>
+                        Select a service
+                      </option>
+                      <option value="Brand Strategy">Brand Strategy</option>
+                      <option value="Brand Identity">Brand Identity</option>
+                      <option value="Website Design">Website Design</option>
+                      <option value="Website Development">
+                        Website Development
+                      </option>
+                      <option value="Full Project">Full Project</option>
+                      <option value="Something else">Something else</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="message"
+                      className="mb-2 block text-xs font-medium uppercase tracking-wider text-charcoal/50"
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={5}
+                      disabled={isSubmitting}
+                      className="form-input min-h-[140px] resize-y"
+                      placeholder="Tell us about your project..."
+                    />
+                  </div>
+
+                  {error && (
+                    <p className="text-sm text-red-700/80" role="alert">
+                      {error}
+                    </p>
+                  )}
+
+                  <Button
+                    type="submit"
+                    fullWidth
+                    className="sm:w-auto"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Send message"}
+                  </Button>
+                </form>
+              )}
+            </FadeIn>
           </div>
         </Container>
       </section>
