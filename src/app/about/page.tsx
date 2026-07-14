@@ -110,34 +110,23 @@ export default function AboutPage() {
             </h2>
           </FadeIn>
 
-          <div className="mt-12 space-y-5">
-            <div className="grid gap-5 md:grid-cols-12">
-              <FadeIn className="md:col-span-7">
-                <VintageImage
-                  src={images.kea[0].src}
-                  alt={images.kea[0].alt}
-                  fill
-                  className="relative aspect-[16/10] rounded-organic shadow-soft md:aspect-[16/11]"
-                  sizes="(max-width: 768px) 100vw, 58vw"
-                />
-              </FadeIn>
-              <FadeIn delay={0.1} className="md:col-span-5">
-                <VintageImage
-                  src={images.kea[1].src}
-                  alt={images.kea[1].alt}
-                  fill
-                  className="relative aspect-[4/5] rounded-organic shadow-soft"
-                  sizes="(max-width: 768px) 100vw, 42vw"
-                />
-              </FadeIn>
-            </div>
-            <FadeIn delay={0.15}>
+          <div className="mt-12 grid gap-5 md:grid-cols-12">
+            <FadeIn className="md:col-span-7">
               <VintageImage
-                src={images.kea[2].src}
-                alt={images.kea[2].alt}
+                src={images.kea[0].src}
+                alt={images.kea[0].alt}
                 fill
-                className="relative aspect-[16/10] w-full rounded-organic shadow-soft md:aspect-[2/1]"
-                sizes="(max-width: 768px) 100vw, 1100px"
+                className="relative aspect-[16/10] rounded-organic shadow-soft md:aspect-[16/11]"
+                sizes="(max-width: 768px) 100vw, 58vw"
+              />
+            </FadeIn>
+            <FadeIn delay={0.1} className="md:col-span-5">
+              <VintageImage
+                src={images.kea[1].src}
+                alt={images.kea[1].alt}
+                fill
+                className="relative aspect-[4/5] rounded-organic shadow-soft"
+                sizes="(max-width: 768px) 100vw, 42vw"
               />
             </FadeIn>
           </div>
